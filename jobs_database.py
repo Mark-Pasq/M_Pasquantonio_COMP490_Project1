@@ -42,7 +42,7 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-    project_db = r'C:\Mark Pasquantonio\PycharmProjects\M_Pasquantonio_COMP490_Project1\test\job.db'
+    project_db = r'C:\Mark Pasquantonio\PycharmProjects\M_Pasquantonio_COMP490_Project1\test\jobs.db'
     sql_create_jobs_table = """CREATE TABLE IF NOT EXISTS Jobs_Listing (
                                     id integer NOT NULL,
                                     type text NOT NULL,

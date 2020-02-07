@@ -6,8 +6,10 @@
 # Filename: test_jobs.py
 
 import pytest
-import jobs
+
 import sqlite3
+
+import jobs
 
 
 @pytest.fixture
