@@ -39,8 +39,6 @@ def test_my_jobs_data(get_data):
 def test_my_save_data_func():
     # second required test
     demo_data = {'id': 1234, 'type': "Testable"}
-    list_data = []
-    list_data.append(demo_data)
     file_name = "testfile.txt"
     jobs.save_data(file_name)
     test_data = open(file_name, 'r')
@@ -58,8 +56,6 @@ def test_check_if_db_exists():
 
     # if the count is 1, then table exists
     if c.fetchone()[0] == 1:
-        # print(f"DEBUG!!!!!!!!!:::::: {c.fetchall()}")
-
         print('The table exists.')
     else:
         print('The table does not exist.')
