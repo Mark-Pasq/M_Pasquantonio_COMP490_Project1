@@ -41,21 +41,6 @@ def create_table(con, create_table_sql):
         print(e)
 
 
-def delete_unused_table():
-    c = sqlite3.connect('jobs.db')
-    cursor = c.cursor()
-    droptablestatement1 = 'DROP TABLE IF EXISTS main.Job_List'
-    cursor.execute(droptablestatement1)
-
-    droptablestatement2 = 'DROP TABLE IF EXISTS main.employees'
-    cursor.execute(droptablestatement2)
-
-    c.commit()
-    c.close()
-
-
-delete_unused_table()
-
 
 def main():
     sql_create_jobs_table = """CREATE TABLE IF NOT EXISTS Jobs_Listing (
