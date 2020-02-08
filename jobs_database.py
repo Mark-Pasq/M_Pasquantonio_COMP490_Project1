@@ -30,6 +30,9 @@ def create_a_table():
     connection.close()
 
 
-# if __name__ == '__main__':
-# main()
-create_a_table()
+def main():
+    create_a_table()
+
+
+if __name__ == '__main__':
+    main()
