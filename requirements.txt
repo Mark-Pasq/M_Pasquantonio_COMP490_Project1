@@ -1,3 +1,4 @@
+cursor
 requests
 pytest
 pathlib
