@@ -48,7 +48,7 @@ def test_save_data():
     assert f"{str(demo_data)}\n" in saved_data
 
 
-def test_check_if_db_exists():
+def test_check_if_table_exists():
     conn = sqlite3.connect('jobs.db')
     c = conn.cursor()
 
