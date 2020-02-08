@@ -12,10 +12,18 @@ def create_a_table():
     connection = sqlite3.connect('jobs.db')
     cursor_obj = connection.cursor()
 
-    # # Create table
-    # cursor_obj.execute('''CREATE TABLE IF NOT EXISTS Jobs_Listing
-    #              (Id integer, Type text, url text, Created_at text, Company text, Company_url text, Location text,
-    #              Title text, Description text)''')
+    # Create table
+    cursor_obj.execute('''CREATE TABLE IF NOT EXISTS Jobs_Listing (
+        id INTEGER PRIMARY KEY,
+        type TEXT NOT NULL,
+        url TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        company TEXT NOT NULL,
+        company_url TEXT NOT NULL,
+        location TEXT NOT NULL,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL
+        )''')
 
     # Insert a row of data
     cursor_obj.execute('''INSERT INTO Jobs_Listing VALUES ('1001', 'FullTime', 'http://www.google.com', '02-07-2020',
