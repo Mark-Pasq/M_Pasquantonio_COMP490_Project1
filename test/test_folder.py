@@ -15,13 +15,13 @@ def get_data():
     return jobs.get_github_jobs_data()
 
 
-def test_my_jobs_dict(get_data):
+def test_jobs_dict(get_data):
     # first required test
     assert len(get_data) >= 100
     assert type(get_data[1]) is dict
 
 
-def test_my_jobs_data(get_data):
+def test_jobs_data(get_data):
     # any real data should have both full time and Contract
     # jobs in the list, assert this
     data = get_data
@@ -35,13 +35,15 @@ def test_my_jobs_data(get_data):
     assert contract_found and full_time_found
 
 
-def test_my_save_data_func():
+def test_save_data():
     # second required test
     demo_data = {'id': 1234, 'type': "Testable"}
+    list_data = []
+    list_data.append(demo_data)
     file_name = "testfile.txt"
-    jobs.save_data(file_name)
-    test_data = open(file_name, 'r')
-    saved_data = test_data.readlines()
+    jobs.save_data(list_data, file_name)
+    testfile = open(file_name, 'r')
+    saved_data = testfile.readlines()
     # the save puts a newline at the end
     assert f"{str(demo_data)}\n" in saved_data
 
