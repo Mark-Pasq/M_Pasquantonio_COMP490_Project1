@@ -12,15 +12,14 @@ def create_a_table():
     connection = sqlite3.connect('jobs.db')
     cursor_obj = connection.cursor()
 
-    # Create table
-    cursor_obj.execute('''CREATE TABLE IF NOT EXISTS Jobs_Listing
-                 (Id integer, Type text, url text, Created_at text, Company text, Company_url text, Location text, 
-                 Title text, Description text)''')
+    # # Create table
+    # cursor_obj.execute('''CREATE TABLE IF NOT EXISTS Jobs_Listing
+    #              (Id integer, Type text, url text, Created_at text, Company text, Company_url text, Location text,
+    #              Title text, Description text)''')
 
     # Insert a row of data
-    # cursor_obj.execute('''INSERT INTO Jobs_Listing VALUES ('1001', 'Full Time', 'http://www.google.com', '02-07-2020',
-    # 'Microsoft', 'http://www.google.com', 'Seattle', 'Engineer', 'A great job at a great
-    # place!')''')
+    cursor_obj.execute('''INSERT INTO Jobs_Listing VALUES ('1001', 'FullTime', 'http://www.google.com', '02-07-2020',
+    'Microsoft', 'http://www.google.com', 'Seattle', 'Engineer', 'A job at a great place!')''')
 
     # Save (commit) the changes
     connection.commit()
@@ -31,8 +30,5 @@ def create_a_table():
 
 
 def main():
-    create_a_table()
-
-
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        main()

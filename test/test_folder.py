@@ -5,7 +5,6 @@
 # Project 1 JobsAssignment Sprint 2
 # Filename: test_jobs.py
 import sqlite3
-
 import pytest
 import jobs
 
