@@ -23,15 +23,12 @@ def create_table(cursor):
            );''')
 
 
-def populate_table(cursor):
+def populate_table(cursor, data):
     for listing in data:
         # Insert a row of data
-        cursor.execute('''INSERT INTO Jobs_Listing (type, url, created_at, company, location, title,
-        description) VALUES (?, ?, ?, ?, ?, ?, ?)''', (listing['type'], listing['url'],
-                                                       listing['created_at'], listing['company'],
-                                                       listing['location'],
-                                                       listing['title'],
-                                                       listing['description']))
+        cursor.execute('''INSERT INTO Jobs_Listing (type, url, created_at, company, location, title, description) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)''', (listing['type'], listing['url'], listing['created_at'], listing['company'],
+                                          listing['location'], listing['title'], listing['description']))
 
 
 def close_db(connection: sqlite3.Connection):
@@ -46,6 +43,5 @@ def main():
     print(type(conn))
     close_db(conn)
 
-
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        main()
