@@ -23,7 +23,7 @@ def create_table(cursor):
            );''')
 
 
-def populate_table(cursor, data):
+def populate_table(cursor):
     for listing in data:
         # Insert a row of data
         cursor.execute('''INSERT INTO Jobs_Listing (type, url, created_at, company, location, title,
@@ -42,7 +42,7 @@ def close_db(connection: sqlite3.Connection):
 def main():
     conn, cursor = open_db("jobs.sqlite")
     create_table(cursor)
-    populate_table(cursor)
+    populate_table(cursor, data)
     print(type(conn))
     close_db(conn)
 
