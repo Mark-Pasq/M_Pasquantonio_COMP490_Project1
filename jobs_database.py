@@ -13,7 +13,7 @@ def create_a_table():
     cursor_obj = connection.cursor()
 
     # Create table
-    cursor_obj.execute('''CREATE TABLE IF NOT EXISTS Jobs_Listing (
+    cursor_obj.execute('''CREATE TABLE IF NOT EXISTS main.Jobs_Listing (
         id INTEGER PRIMARY KEY,
         type TEXT NOT NULL,
         url TEXT NOT NULL,
@@ -23,11 +23,17 @@ def create_a_table():
         location TEXT NOT NULL,
         title TEXT NOT NULL,
         description TEXT NOT NULL
-        )''')
+        );''')
 
+    return connection()
+
+
+
+def populate_table(cursor_obj):
     # Insert a row of data
-    cursor_obj.execute('''INSERT INTO Jobs_Listing VALUES ('1001', 'FullTime', 'http://www.google.com', '02-07-2020',
-    'Microsoft', 'http://www.google.com', 'Seattle', 'Engineer', 'A job at a great place!')''')
+    cursor_obj.execute('''INSERT INTO Jobs_Listing (id, type, url, created_at, company, company_url, location, title,
+    description) VALUES ('1001', 'FullTime', 'http://www.google.com', '02-07-2020', 'Microsoft',
+    'http://www.google.com', 'Seattle', 'Engineer', 'A job at a great place!')''')
 
     # Save (commit) the changes
     connection.commit()
@@ -38,5 +44,8 @@ def create_a_table():
 
 
 def main():
+    create_a_table()
+    populate_table()
+
     if __name__ == '__main__':
         main()

@@ -7,6 +7,7 @@
 import sqlite3
 import pytest
 import jobs
+import santore_db
 
 
 @pytest.fixture
@@ -49,11 +50,13 @@ def test_save_data():
 
 
 def test_check_if_table_exists():
-    conn = sqlite3.connect('jobs.db')
+    conn = sqlite3.connect('test_github_jobs.sqlite')
     c = conn.cursor()
 
+    santore_db.create_table(c)
+
     # get the count of tables with the name
-    c.execute(''' SELECT count(name) FROM main.sqlite_master WHERE type='table' AND name='Jobs_Listing' ''')
+    c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Jobs_Listing' ''')
 
     # if the count is 1, then table exists
     if c.fetchone()[0] == 1:
