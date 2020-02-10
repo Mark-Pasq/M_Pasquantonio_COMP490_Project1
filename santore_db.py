@@ -47,6 +47,7 @@ def close_db(connection: sqlite3.Connection):
 
 
 def main():
+    data = jobs.get_github_jobs_data()
     conn, cursor = open_db("github_jobs.sqlite")
     create_table(cursor)
     populate_table(cursor, data)
