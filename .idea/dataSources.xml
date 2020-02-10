@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="github_jobs.sqlite" uuid="c3ba6e54-0d4a-40c3-8148-7850053fde54">
+    <data-source source="LOCAL" name="github_jobs.sqlite" uuid="76cd8d42-9756-4584-9b26-72701f369fff">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/github_jobs.sqlite</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="test_github_jobs.sqlite" uuid="ed188e29-a253-4202-a333-372aca4eb09c">
+    <data-source source="LOCAL" name="test_github_jobs.sqlite" uuid="af5bd792-7cd8-48c1-8e4f-9e5a0381f11a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

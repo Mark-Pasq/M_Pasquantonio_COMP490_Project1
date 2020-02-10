@@ -11,7 +11,7 @@ def open_db(filename: str) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
 def create_table(cursor):
     # Create table
     cursor.execute('''CREATE TABLE IF NOT EXISTS main.Jobs_Listing (
-           id TEXT PRIMARY KEY,
+           id INTEGER PRIMARY KEY,
            type TEXT,
            url TEXT,
            created_at TEXT,
@@ -23,12 +23,13 @@ def create_table(cursor):
            );''')
 
 
-def populate_table(cursor, data):
+def populate_table(cursor):
     for listing in data:
         # Insert a row of data
-        cursor.execute('''INSERT INTO Jobs_Listing (type, url, created_at, company, location, title, description) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)''', (listing['type'], listing['url'], listing['created_at'], listing['company'],
-                                          listing['location'], listing['title'], listing['description']))
+        cursor.execute('''INSERT INTO Jobs_Listing (id, type, url, created_at, company, location, title, description) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (listing['id'], listing['type'], listing['url'], listing['created_at'],
+                                             listing['company'], listing['location'], listing['title'],
+                                             listing['description']))
 
 
 def close_db(connection: sqlite3.Connection):
@@ -37,9 +38,9 @@ def close_db(connection: sqlite3.Connection):
 
 
 def main():
-    conn, cursor = open_db("jobs.sqlite")
+    conn, cursor = open_db("github_jobs.sqlite")
     create_table(cursor)
-    populate_table(cursor, data)
+    populate_table(cursor)
     print(type(conn))
     close_db(conn)
 
