@@ -23,13 +23,21 @@ def create_table(cursor):
            );''')
 
 
-def populate_table(cursor):
+def populate_table(cursor, data):
     for listing in data:
         # Insert a row of data
         cursor.execute('''INSERT INTO Jobs_Listing (id, type, url, created_at, company, location, title, description) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (listing['id'], listing['type'], listing['url'], listing['created_at'],
                                              listing['company'], listing['location'], listing['title'],
                                              listing['description']))
+
+
+def fetch_data(cursor):
+    cursor.execute('''SELECT company FROM main.Jobs_Listing WHERE location == Chicago''')
+    rows = cursor.fetchall()
+
+    for row in rows:
+        print(row)
 
 
 def close_db(connection: sqlite3.Connection):
@@ -40,7 +48,8 @@ def close_db(connection: sqlite3.Connection):
 def main():
     conn, cursor = open_db("github_jobs.sqlite")
     create_table(cursor)
-    populate_table(cursor)
+    populate_table(cursor, data)
+    fetch_data(cursor)
     print(type(conn))
     close_db(conn)
 
