@@ -53,18 +53,46 @@ def test_check_if_table_exists():
     conn = sqlite3.connect('test_github_jobs.sqlite')
     c = conn.cursor()
 
-    santore_db.create_table(c)
+    # santore_db.create_table(c)
 
     # get the count of tables with the name
     c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Jobs_Listing' ''')
 
     # if the count is 1, then table exists
-    if c.fetchone()[0] == 1:
-        print('The table exists.')
-    else:
-        print('The table does not exist.')
+    assert (c.fetchone()[0] == 1)
+    print('There is only 1 table in the database named Jobs_Listing.')
 
     # commit the changes to db
     conn.commit()
     # close the connection
     conn.close()
+
+
+# def test_fetch_data():
+#     conn = sqlite3.connect('github_jobs.sqlite')
+#     cursor = conn.cursor()
+#     cursor.execute('''SELECT location FROM main.Jobs_Listing WHERE location = Chicago''')
+#     rows = cursor.fetchall()
+#
+#     for row in rows:
+#         print(row)
+#
+#     conn.commit()
+#     conn.close()
+def test_get_locations():
+
+    conn = sqlite3.connect('test_github_jobs.sqlite')
+    cursor = conn.cursor()
+
+    for row in cursor.execute("SELECT EXISTS (SELECT 7 from Jobs_Listing WHERE id = "
+                              "'7b7d433d-caf3-4b1b-9cf1-e4c25d560a53')"):
+        assert 'location', row[0] == 'New York'
+        print('New York is the location of the job in row 0')
+
+#     # commit the changes to db
+#     conn.commit()
+#     # close the connection
+#     conn.close()
+#
+#
+# test_get_locations()
