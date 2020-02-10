@@ -1,5 +1,6 @@
 import sqlite3
 from typing import Tuple
+import jobs
 
 
 def open_db(filename: str) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
