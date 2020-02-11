@@ -10,6 +10,9 @@ import pytest
 
 import jobs
 
+conn = sqlite3.connect('test_github_jobs.sqlite')
+c = conn.cursor()
+
 
 @pytest.fixture
 def get_data():
@@ -51,8 +54,8 @@ def test_save_data():
 
 
 def test_check_if_table_exists():
-    conn = sqlite3.connect('test_github_jobs.sqlite')
-    c = conn.cursor()
+    # conn = sqlite3.connect('test_github_jobs.sqlite')
+    # c = conn.cursor()
 
     # santore_db.create_table(c)
 
@@ -64,19 +67,8 @@ def test_check_if_table_exists():
     print('There is only 1 table in the database named Jobs_Listing.')
 
 
-# def test_fetch_data():
-#     conn = sqlite3.connect('github_jobs.sqlite')
-#     cursor = conn.cursor()
-#     cursor.execute('''SELECT location FROM main.Jobs_Listing WHERE location = Chicago''')
-#     rows = cursor.fetchall()
-#
-#     for row in rows:
-#         print(row)
-#
-#     conn.commit()
-#     conn.close()
 def test_get_locations():
-    conn = sqlite3.connect('test_github_jobs.sqlite')
+    # conn = sqlite3.connect('test_github_jobs.sqlite')
     cursor = conn.cursor()
 
     for row in cursor.execute("SELECT EXISTS (SELECT 7 from Jobs_Listing WHERE id = "
@@ -86,15 +78,16 @@ def test_get_locations():
 
 
 def test_get_number_of_rows():
-    conn = sqlite3.connect('test_github_jobs.sqlite')
-    cursor = conn.cursor()
-    # result = cursor.execute("select count(*) from Jobs_Listing")  # returns array of tuples
+    con = sqlite3.connect('test_github_jobs.sqlite')
+    cursor = con.cursor()
+    # result = c.execute("select count(*) from Jobs_Listing")  # returns array of tuples
     # assert result[0][0] > 200
-    cursor.execute("BEGIN")  # start transaction
-    n = cursor.execute("SELECT COUNT() FROM Jobs_Listing").fetchone()[0]
-    # if n > big: be_prepared()
-    all_rows = cursor.execute("SELECT * FROM Jobs_Listing").fetchall()
-
-    assert n == len(all_rows)
-    print(len(all_rows))
-    cursor.connection.commit()  # end transaction
+    # cursor.execute("BEGIN")  # start transaction
+    # # if n > big: be_prepared()
+    # all_rows = cursor.execute("SELECT * FROM Jobs_Listing").fetchall()
+    # #
+    # # assert n == len(all_rows)
+    # # print(len(all_rows))
+    # cursor.connection.commit()  # end transaction
+    rows_query = "SELECT Count() FROM 'sqlite_master'"
+    cursor.execute(rows_query)
