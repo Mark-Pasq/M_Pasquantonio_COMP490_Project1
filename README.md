@@ -9,4 +9,7 @@
 # I started of pretty well and was able to get the data and set up a table, but had difficulties getting
 # the data into the table so it could be manipulated.
 
+# I was finally able to import the data and create some tests to see if things were working, but testing
+# continues to be a struggle for me.
+
 
