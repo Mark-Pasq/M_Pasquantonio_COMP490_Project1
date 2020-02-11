@@ -5,9 +5,10 @@
 # Project 1 JobsAssignment Sprint 2
 # Filename: test_jobs.py
 import sqlite3
+
 import pytest
+
 import jobs
-import santore_db
 
 
 @pytest.fixture
@@ -62,11 +63,6 @@ def test_check_if_table_exists():
     assert (c.fetchone()[0] == 1)
     print('There is only 1 table in the database named Jobs_Listing.')
 
-    # commit the changes to db
-    conn.commit()
-    # close the connection
-    conn.close()
-
 
 # def test_fetch_data():
 #     conn = sqlite3.connect('github_jobs.sqlite')
@@ -80,7 +76,6 @@ def test_check_if_table_exists():
 #     conn.commit()
 #     conn.close()
 def test_get_locations():
-
     conn = sqlite3.connect('test_github_jobs.sqlite')
     cursor = conn.cursor()
 
@@ -89,10 +84,17 @@ def test_get_locations():
         assert 'location', row[0] == 'New York'
         print('New York is the location of the job in row 0')
 
-#     # commit the changes to db
-#     conn.commit()
-#     # close the connection
-#     conn.close()
-#
-#
-# test_get_locations()
+
+def test_get_number_of_rows():
+    conn = sqlite3.connect('test_github_jobs.sqlite')
+    cursor = conn.cursor()
+    # result = cursor.execute("select count(*) from Jobs_Listing")  # returns array of tuples
+    # assert result[0][0] > 200
+    cursor.execute("BEGIN")  # start transaction
+    n = cursor.execute("SELECT COUNT() FROM Jobs_Listing").fetchone()[0]
+    # if n > big: be_prepared()
+    all_rows = cursor.execute("SELECT * FROM Jobs_Listing").fetchall()
+
+    assert n == len(all_rows)
+    print(len(all_rows))
+    cursor.connection.commit()  # end transaction
