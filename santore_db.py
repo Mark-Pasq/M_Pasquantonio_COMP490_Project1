@@ -27,15 +27,15 @@ def create_table(cursor):
 def populate_table(cursor, data):
     for listing in data:
         # Insert a row of data
-        cursor.execute('''INSERT INTO Jobs_Listing (id, type, url, created_at, company, location, title, 
-            description) VALUES (?, ?, ?, ?, ?, ?, ?, ?);''', (listing['id'], listing['type'], listing['url'],
-                                                               listing['created_at'], listing['company'],
-                                                               listing['location'],
-                                                               listing['title'], listing['description']))
+        cursor.execute('''INSERT INTO Jobs_Listing (id, type, url, created_at, company, company_url, location, title, 
+        description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);''', (listing['id'], listing['type'], listing['url'],
+                                                              listing['created_at'], listing['company'],
+                                                              listing['company_URL'], listing['location'],
+                                                              listing['title'], listing['description']))
 
 
 def get_number_of_rows():
-    conn = sqlite3.connect('test_github_jobs.sqlite')
+    conn = sqlite3.connect('github_jobs.sqlite')
     cursor = conn.cursor()
     cursor.execute("BEGIN")  # start transaction
     n = cursor.execute("SELECT COUNT() FROM Jobs_Listing").fetchone()[0]
