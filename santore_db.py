@@ -3,25 +3,11 @@ from typing import Tuple
 import jobs
 
 
-def open_db(filename: str) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
-    db_connection = sqlite3.connect(filename)  # connect to existing DB or create new one
-    cursor = db_connection.cursor()  # get ready to read/write data
-    return db_connection, cursor
-
-
 def create_table(cursor):
     # Create table
     cursor.execute('''CREATE TABLE IF NOT EXISTS main.Jobs_Listing (
-           id INTEGER PRIMARY KEY,
-           type TEXT,
-           url TEXT,
-           created_at TEXT,
-           company TEXT,
-           company_url TEXT,
-           location TEXT,
-           title TEXT,
-           description TEXT
-           );''')
+                    id INTEGER PRIMARY KEY, type TEXT, url TEXT, created_at TEXT, company TEXT, company_url TEXT,
+                    location TEXT, title TEXT, description TEXT);''')
 
 
 def populate_table(cursor, data):
@@ -42,8 +28,14 @@ def get_number_of_rows():
     # if n > big: be_prepared()
     cursor.execute("SELECT * FROM Jobs_Listing").fetchall()
     cursor.connection.commit()  # end transaction
-    # assert n == len(all_rows)
+    assert n == len(all_rows)
     print(n)
+
+
+def open_db(filename: str) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
+    db_connection = sqlite3.connect(filename)  # connect to existing DB or create new one
+    cursor = db_connection.cursor()  # get ready to read/write data
+    return db_connection, cursor
 
 
 def close_db(connection: sqlite3.Connection):

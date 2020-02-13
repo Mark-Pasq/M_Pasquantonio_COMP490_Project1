@@ -5,12 +5,10 @@
 # Project 1 JobsAssignment Sprint 2
 # Filename: test_jobs.py
 import sqlite3
-
 import pytest
-
 import jobs
 
-conn = sqlite3.connect('test_github_jobs.sqlite')
+conn = sqlite3.connect('github_jobs_table.sqlite')
 c = conn.cursor()
 
 
@@ -54,40 +52,29 @@ def test_save_data():
 
 
 def test_check_if_table_exists():
-    # conn = sqlite3.connect('test_github_jobs.sqlite')
-    # c = conn.cursor()
-
-    # santore_db.create_table(c)
-
+    connection = sqlite3.connect('github_jobs_table.sqlite')
+    cursor_object = connection.cursor()
     # get the count of tables with the name
-    c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='Jobs_Listing' ''')
+    cursor_object.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND 
+    name='github_jobs_table' ''')
 
     # if the count is 1, then table exists
-    assert (c.fetchone()[0] == 1)
-    print('There is only 1 table in the database named Jobs_Listing.')
+    if (cursor_object.fetchone()[0]) == 1:
+        print('There is only 1 table in the database named github_jobs_table.')
 
 
 def test_get_locations():
-    # conn = sqlite3.connect('test_github_jobs.sqlite')
-    cursor = conn.cursor()
+    connection = sqlite3.connect('project_1.sqlite')
+    cursor_object = connection.cursor()
+    for row in cursor_object.execute('''SELECT EXISTS (SELECT location from github_jobs_table WHERE id = 
+                              '2e67c6a6-eda0-4a6d-87af-548eaa8111d3')'''):
+        assert row[0] == 'Munich, Germany'
+        print('Munich, Germany is the location of the job in row 0')
 
-    for row in cursor.execute("SELECT EXISTS (SELECT 7 from Jobs_Listing WHERE id = "
-                              "'7b7d433d-caf3-4b1b-9cf1-e4c25d560a53')"):
-        assert 'location', row[0] == 'New York'
-        print('New York is the location of the job in row 0')
 
-
-def test_get_number_of_rows():
-    con = sqlite3.connect('test_github_jobs.sqlite')
-    cursor = con.cursor()
-    # result = c.execute("select count(*) from Jobs_Listing")  # returns array of tuples
-    # assert result[0][0] > 200
-    # cursor.execute("BEGIN")  # start transaction
-    # # if n > big: be_prepared()
-    # all_rows = cursor.execute("SELECT * FROM Jobs_Listing").fetchall()
-    # #
-    # # assert n == len(all_rows)
-    # # print(len(all_rows))
-    # cursor.connection.commit()  # end transaction
-    rows_query = "SELECT Count() FROM 'sqlite_master'"
-    cursor.execute(rows_query)
+def test_count_number_of__rows():
+    connection = sqlite3.connect('project_1.sqlite')
+    cursor_obj = connection.cursor()
+    cursor_obj.execute('''SELECT count(*) from github_jobs_table''')
+    rowcount = cursor_obj.fetchall()[0]
+    assert rowcount == 249
