@@ -8,7 +8,7 @@ import sqlite3
 import pytest
 import jobs
 
-conn = sqlite3.connect('github_jobs_table.sqlite')
+conn = sqlite3.connect('test_project_1.sqlite')
 c = conn.cursor()
 
 
@@ -52,11 +52,11 @@ def test_save_data():
 
 
 def test_check_if_table_exists():
-    connection = sqlite3.connect('github_jobs_table.sqlite')
+    connection = sqlite3.connect('test_project_1.sqlite')
     cursor_object = connection.cursor()
     # get the count of tables with the name
     cursor_object.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND 
-    name='github_jobs_table' ''')
+    name='test_github_jobs_table' ''')
 
     # if the count is 1, then table exists
     if (cursor_object.fetchone()[0]) == 1:
@@ -64,17 +64,19 @@ def test_check_if_table_exists():
 
 
 def test_get_locations():
-    connection = sqlite3.connect('project_1.sqlite')
+    connection = sqlite3.connect('test_project_1.sqlite')
     cursor_object = connection.cursor()
-    for row in cursor_object.execute('''SELECT EXISTS (SELECT location from github_jobs_table WHERE id = 
+    for row in cursor_object.execute('''SELECT EXISTS (SELECT location from test_github_jobs_table WHERE id = 
                               '2e67c6a6-eda0-4a6d-87af-548eaa8111d3')'''):
         assert row[0] == 'Munich, Germany'
         print('Munich, Germany is the location of the job in row 0')
+
+        connection.commit()
 
 
 def test_count_number_of__rows():
     connection = sqlite3.connect('project_1.sqlite')
     cursor_obj = connection.cursor()
-    cursor_obj.execute('''SELECT count(*) from github_jobs_table''')
+    cursor_obj.execute('''SELECT count(*) from github_jobs_table ''')
     rowcount = cursor_obj.fetchall()[0]
     assert rowcount == 249
