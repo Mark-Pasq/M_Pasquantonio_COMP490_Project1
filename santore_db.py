@@ -20,16 +20,20 @@ def populate_table(cursor, data):
                                                               listing['title'], listing['description']))
 
 
-def get_number_of_rows():
-    conn = sqlite3.connect('github_jobs.sqlite')
+def test_get_number_of_rows():
+    conn = sqlite3.connect('rss.sqlite')
     cursor = conn.cursor()
     cursor.execute("BEGIN")  # start transaction
-    n = cursor.execute("SELECT COUNT() FROM Jobs_Listing").fetchone()[0]
+    number_of_rows = cursor.execute("SELECT COUNT() FROM RSSentries").fetchone()[0]
     # if n > big: be_prepared()
-    cursor.execute("SELECT * FROM Jobs_Listing").fetchall()
+    cursor.execute("SELECT * FROM RSSentries").fetchall()
     cursor.connection.commit()  # end transaction
-    assert n == len(all_rows)
-    print(n)
+    if number_of_rows >= 500:
+        assert number_of_rows >= 500
+        print('YES!! There are ' + str(number_of_rows) + ' rows in the table.')
+    elif number_of_rows > 5000:
+        assert number_of_rows < 5000
+        print('NO!!  There are only ' + str(number_of_rows) + ' rows in the table.')
 
 
 def open_db(filename: str) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:

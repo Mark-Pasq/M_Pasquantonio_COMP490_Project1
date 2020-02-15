@@ -1,6 +1,9 @@
+connection
+lxml
+pip
 urllib3
 cursor
 requests
 pytest
 feedparser
-threading
+

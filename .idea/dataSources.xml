@@ -13,5 +13,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test/test_project_1.sqlite</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="rss.sqlite" uuid="ef672734-1f6e-4082-b8f8-542d49d08d18">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/rss.sqlite</jdbc-url>
+    </data-source>
   </component>
 </project>

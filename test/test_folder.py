@@ -8,8 +8,8 @@ import sqlite3
 import pytest
 import jobs
 
-conn = sqlite3.connect('test_project_1.sqlite')
-c = conn.cursor()
+conn = sqlite3.connect('rss.sqlite')
+cur_obj = conn.cursor()
 
 
 @pytest.fixture
@@ -20,7 +20,7 @@ def get_data():
 
 def test_jobs_dict(get_data):
     # first required test
-    assert len(get_data) >= 100
+    assert len(get_data) >= 175
     assert type(get_data[1]) is dict
 
 
@@ -52,31 +52,33 @@ def test_save_data():
 
 
 def test_check_if_table_exists():
-    connection = sqlite3.connect('test_project_1.sqlite')
+    connection = sqlite3.connect('rss.sqlite')
     cursor_object = connection.cursor()
     # get the count of tables with the name
-    cursor_object.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND 
-    name='test_github_jobs_table' ''')
-
+    cursor_object.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='RSSentries' ''')
     # if the count is 1, then table exists
-    if (cursor_object.fetchone()[0]) == 1:
-        print('There is only 1 table in the database named github_jobs_table.')
+    assert cursor_object.fetchone()[0] == 0
+    print('There is only 1 table in the database named RSSentries.')
 
 
 def test_get_locations():
-    connection = sqlite3.connect('test_project_1.sqlite')
-    cursor_object = connection.cursor()
-    for row in cursor_object.execute('''SELECT EXISTS (SELECT location from test_github_jobs_table WHERE id = 
-                              '2e67c6a6-eda0-4a6d-87af-548eaa8111d3')'''):
-        assert row[0] == 'Munich, Germany'
-        print('Munich, Germany is the location of the job in row 0')
-
-        connection.commit()
-
-
-def test_count_number_of__rows():
     connection = sqlite3.connect('project_1.sqlite')
-    cursor_obj = connection.cursor()
-    cursor_obj.execute('''SELECT count(*) from github_jobs_table ''')
-    rowcount = cursor_obj.fetchall()[0]
-    assert rowcount == 249
+    cursor_object = connection.cursor()
+    cursor_object.execute(''' SELECT company, location FROM main.github_jobs_table WHERE location ='New York'
+     and company = 'Nike' ''')
+
+
+def test_get_number_of_rows():
+    connection = sqlite3.connect('project_1.sqlite')
+    cursor_object = connection.cursor()
+    cursor_object.execute("BEGIN")  # start transaction
+    number_of_rows = cursor_object.execute("SELECT COUNT() FROM sqlite_master").fetchone()[0]
+    # if n > big: be_prepared()
+    cursor_object.execute("SELECT * FROM sqlite_master").fetchall()
+    cursor_object.connection.commit()  # end transaction
+    if number_of_rows >= 500:
+        # assert number_of_rows >= 500
+        print('YES!! There are ' + str(number_of_rows) + ' rows in the table.')
+    # if number_of_rows > 5000:
+    #     assert number_of_rows < 5000
+    #     print('NO!!  There are only ' + str(number_of_rows) + ' rows in the table.')
