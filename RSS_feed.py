@@ -17,11 +17,13 @@ for items in myfeed['items']:
     category = items.category
     title = items.title
     description = items.description
+    pubDate = items.pubDate
 
     print(link)
     print(category)
     print(title)
     print(description)
+    print(pubDate)
 
     # get the database ready for data
     connection = sqlite3.connect('rss.sqlite')
@@ -29,8 +31,9 @@ for items in myfeed['items']:
     # Create the table and place the data in the proper place
     with connection:
         cursor_object = connection.cursor()
-        cursor_object.execute('INSERT INTO RSSentries (link, category, title, description) VALUES (?, ?, ?, ?)',
-                              (items['link'], items['category'], items['title'], items['description']))
+        cursor_object.execute('INSERT INTO RSSentries (link, category, title, description, pubDate) '
+                              'VALUES (?, ?, ?, ?, ?)', (items['link'], items['category'], items['title'],
+                                                         items['description'], items['pubDate']))
 
 # Commit your changes to the program
 connection.commit()
