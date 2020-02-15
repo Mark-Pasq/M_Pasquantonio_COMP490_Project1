@@ -13,27 +13,26 @@ def create_table(cursor):
 def populate_table(cursor, data):
     for listing in data:
         # Insert a row of data
-        cursor.execute('''INSERT INTO Jobs_Listing (id, type, url, created_at, company, company_url, location, title, 
-        description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);''', (listing['id'], listing['type'], listing['url'],
-                                                              listing['created_at'], listing['company'],
-                                                              listing['company_URL'], listing['location'],
-                                                              listing['title'], listing['description']))
+        cursor.execute('INSERT INTO github_jobs_table (id, type, url, created_at, company, company_url, '
+                       'location, title, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',
+                       (listing['id'], listing['type'], listing['url'], listing['created_at'], listing['company'],
+                        listing['company_URL'], listing['location'], listing['title'], listing['description']))
 
 
-def test_get_number_of_rows():
-    conn = sqlite3.connect('rss.sqlite')
-    cursor = conn.cursor()
-    cursor.execute("BEGIN")  # start transaction
-    number_of_rows = cursor.execute("SELECT COUNT() FROM RSSentries").fetchone()[0]
-    # if n > big: be_prepared()
-    cursor.execute("SELECT * FROM RSSentries").fetchall()
-    cursor.connection.commit()  # end transaction
-    if number_of_rows >= 500:
-        assert number_of_rows >= 500
-        print('YES!! There are ' + str(number_of_rows) + ' rows in the table.')
-    elif number_of_rows > 5000:
-        assert number_of_rows < 5000
-        print('NO!!  There are only ' + str(number_of_rows) + ' rows in the table.')
+# def test_get_number_of_rows():
+#     conn = sqlite3.connect('rss.sqlite')
+#     cursor = conn.cursor()
+#     cursor.execute("BEGIN")  # start transaction
+#     number_of_rows = cursor.execute("SELECT COUNT() FROM RSSentries").fetchone()[0]
+#     # if n > big: be_prepared()
+#     cursor.execute("SELECT * FROM RSSentries").fetchall()
+#     cursor.connection.commit()  # end transaction
+#     if number_of_rows >= 500:
+#         assert number_of_rows >= 500
+#         print('YES!! There are ' + str(number_of_rows) + ' rows in the table.')
+#     elif number_of_rows > 5000:
+#         assert number_of_rows < 5000
+#         print('NO!!  There are only ' + str(number_of_rows) + ' rows in the table.')
 
 
 def open_db(filename: str) -> Tuple[sqlite3.Connection, sqlite3.Cursor]:
@@ -52,7 +51,7 @@ def main():
     conn, cursor = open_db("github_jobs.sqlite")
     create_table(cursor)
     populate_table(cursor, data)
-    get_number_of_rows()
+    # test_get_number_of_rows()
     print(type(conn))
     close_db(conn)
 
