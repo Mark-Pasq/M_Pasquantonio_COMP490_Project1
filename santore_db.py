@@ -5,7 +5,9 @@ import jobs
 
 def create_table(cursor):
     # Create table
-    cursor.execute('''CREATE TABLE IF NOT EXISTS main.Jobs_Listing (
+    connection = sqlite3.connect("jobs_listing.sqlite")
+    cursor = connection.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS git_jobs_tbl (
                     id INTEGER PRIMARY KEY, type TEXT, url TEXT, created_at TEXT, company TEXT, company_url TEXT,
                     location TEXT, title TEXT, description TEXT);''')
 
@@ -13,7 +15,7 @@ def create_table(cursor):
 def populate_table(cursor, data):
     for listing in data:
         # Insert a row of data
-        cursor.execute('INSERT INTO github_jobs_table (id, type, url, created_at, company, company_url, '
+        cursor.execute('INSERT INTO git_jobs_tbl (id, type, url, created_at, company, company_url, '
                        'location, title, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);',
                        (listing['id'], listing['type'], listing['url'], listing['created_at'], listing['company'],
                         listing['company_URL'], listing['location'], listing['title'], listing['description']))
@@ -46,11 +48,11 @@ def close_db(connection: sqlite3.Connection):
     connection.close()
 
 
-def main():
+def main(cursor, conn):
     data = jobs.get_github_jobs_data()
-    conn, cursor = open_db("github_jobs.sqlite")
+    open_db("git_jobs.sqlite")
     create_table(cursor)
-    populate_table(cursor, data)
+    # populate_table(cursor, data)
     # test_get_number_of_rows()
     print(type(conn))
     close_db(conn)

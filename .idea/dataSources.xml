@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="project_1.sqlite" uuid="35ca2e61-7814-4e1a-9cf5-a769cda4ea5f">
+    <data-source source="LOCAL" name="jobdemo.sqlite" uuid="1d6eaa1a-fc61-424b-8399-e0c513347b1a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/project_1.sqlite</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="test_project_1.sqlite" uuid="6a693bae-9b2a-478d-9679-090fd67cfa21">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test/test_project_1.sqlite</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="rss.sqlite" uuid="ef672734-1f6e-4082-b8f8-542d49d08d18">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/rss.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/jobdemo.sqlite</jdbc-url>
     </data-source>
   </component>
 </project>
