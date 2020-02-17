@@ -33,4 +33,3 @@ cur.close()
 
 # close the connection
 db.close()
-
