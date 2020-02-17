@@ -24,8 +24,7 @@ for item in myfeed['items']:
     db = sqlite3.connect('rss.sqlite')
     with db:
         cur = db.cursor()
-        cur.execute(f'''INSERT INTO main.RSSentries(title, link, description) 
-                        VALUES (?, ?, ?);''', (title, link, description))
+        cur.execute(f'''INSERT INTO main.RSSentries(title, link, description) VALUES (?, ?, ?);''', (title, link, description))
 
         print('Succesfull!')
 # close the cursor
