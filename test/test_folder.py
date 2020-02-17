@@ -67,7 +67,7 @@ def test_get_location():
     connection = sqlite3.connect('testonly.sqlite')
     cursor_object = connection.cursor()
     cursor_object.execute(''' SELECT company, location FROM main.test_table WHERE 
-        location ='Beaverton, Oregon'and company = 'Nike' ''')
+                            location ='Beaverton, Oregon'and company = 'Nike' ''')
 
 
 def test_table_exists():
