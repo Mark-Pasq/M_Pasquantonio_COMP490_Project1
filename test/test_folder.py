@@ -9,8 +9,6 @@ This file handles the tests associated with COMP490 Project 1.
 """
 
 import sqlite3
-from typing import List, Dict, Any
-
 import pytest
 import jobs
 
