@@ -7,5 +7,17 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/jobdemo.sqlite</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="testonly.sqlite" uuid="42a76c33-8fc4-413a-beda-1804fee3e608">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test/testonly.sqlite</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="rss.sqlite" uuid="3df4ba4a-3848-4642-9b39-d2a3f264be47">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/rss/rss.sqlite</jdbc-url>
+    </data-source>
   </component>
 </project>
