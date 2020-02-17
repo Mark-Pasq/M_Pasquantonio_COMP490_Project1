@@ -10,7 +10,6 @@ This file handles the tests associated with COMP490 Project 1.
 
 import sqlite3
 import pytest
-import jobs
 
 
 @pytest.fixture
@@ -81,7 +80,6 @@ def test_table_exists():
     """results = result_cursor.rowcount"""
     success = len(result_cursor.fetchall()) >= 1
     assert success
-
 
 # def test_save_data():  # modern sprint2 version of save data
 #     # this is fake data, but I'm testing the save_to_db function so fake data is fine
