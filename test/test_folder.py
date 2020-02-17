@@ -9,6 +9,8 @@ This file handles the tests associated with COMP490 Project 1.
 """
 
 import sqlite3
+from typing import List, Dict, Any
+
 import pytest
 import jobs
 
@@ -56,18 +58,17 @@ def test_check_if_table_exists():
     connection = sqlite3.connect('rss.sqlite')
     cursor_object = connection.cursor()
     # get the count of tables with the name
-    cursor_object.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND 
-                            name='RSSentries' ''')
+    cursor_object.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='RSSentries' ''')
     # if the count is 1, then table exists
     assert cursor_object.fetchone()[0] == 1
     print('There is only 1 table in the database named test_table.')
 
 
 def test_get_location():
-    connection = sqlite3.connect('testonly.sqlite')
+    connection = sqlite3.connect('jobdemo.sqlite')
     cursor_object = connection.cursor()
-    cursor_object.execute(''' SELECT company, location FROM main.test_table WHERE 
-                            location ='Beaverton, Oregon'and company = 'Nike' ''')
+    cursor_object.execute(''' SELECT type, location FROM main.hardcode_github_jobs WHERE location ='Munich, Germany'
+                            and type = 'Full Time' ''')
 
 
 def test_table_exists():
@@ -84,29 +85,20 @@ def test_table_exists():
     assert success
 
 
-def test_save_data():  # modern sprint2 version of save data
-    # this is fake data, but I'm testing the save_to_db function so fake data is fine
-    fake_row = {'id': 'F$RT%YH&', 'type': 'Full Time', 'url': 'http://wwww.fakedata.com', 'created_at': '02-12-2020',
-                'company': "Don't Work Here Comp", 'company_url': None, 'location': "giant urban metro",
-                'title': 'Junior software peon', 'description': "blah blah, devops, scrum, hot tech",
-                'how_to_apply': "http://runaway.com", 'company_logo': None}
-    fake_table = 'test_table'
-    connection, cursor = jobs.open_db('testonly.sqlite')
-    jobs.create_table(cursor, jobs.make_column_description_from_json_dict(fake_row), fake_table)
-    # might have to blow away db on later runs - first run is fine
-    jobs.save_to_db([fake_row], cursor, fake_table)
-    test_query = F"SELECT type from {fake_table} WHERE (id = 'F$RT%YH&')"
-    result_cursor = cursor.execute(test_query)
-    results = result_cursor.rowcount
-    success = len(result_cursor.fetchall()) >= 1
-    jobs.close_db(connection)
-    assert success
-
-# def main():
-#     connection = sqlite3.connect('jobs.hardcode_github_jobs.sqlite')
-#     py_obj = connection.cursor()
-#     py_obj.execute(f'''INSERT INTO 'test_table' (id, type, url, created_at, company, company_url, location, title,
-#                         description, how_to_apply, company_logo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''')
-#
-#     if __name__ == '__main__':
-#         main()
+# def test_save_data():  # modern sprint2 version of save data
+#     # this is fake data, but I'm testing the save_to_db function so fake data is fine
+#     fake_row = {'id': 'F$RT%YH&', 'type': 'Full Time', 'url': 'http://wwww.fakedata.com', 'created_at': '02-12-2020',
+#                 'company': "Don't Work Here Comp", 'company_url': None, 'location': "giant urban metro",
+#                 'title': 'Junior software peon', 'description': "blah blah, devops, scrum, hot tech",
+#                 'how_to_apply': "http://runaway.com", 'company_logo': None}
+#     fake_table = "test_table"
+#     connection, cursor = jobs.open_db('testonly.sqlite')
+#     jobs.create_table(cursor, jobs.make_column_description_from_json_dict(fake_row), fake_table)
+#     # might have to blow away db on later runs - first run is fine
+#     jobs.save_to_db([fake_row], cursor, fake_table)
+#     test_query = F"SELECT type from {fake_table} WHERE (id = 'F$RT%YH&')"
+#     result_cursor = cursor.execute(test_query)
+#     results = result_cursor.rowcount
+#     success = len(result_cursor.fetchall()) >= 1
+#     jobs.close_db(connection)
+#     assert success
