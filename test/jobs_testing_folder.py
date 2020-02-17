@@ -42,8 +42,7 @@ def test_jobs_data(get_data):
 def test_save_data_to_file():
     # second required test
     demo_data = {'id': 1234, 'type': "Testable"}
-    list_data = []
-    list_data.append(demo_data)
+    list_data = [demo_data]
     file_name = "testfile.txt"
     jobs.save_data(list_data, file_name)
     testfile = open(file_name, 'r')
