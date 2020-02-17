@@ -79,7 +79,7 @@ def test_table_exists():
     connection, cursor = jobs.open_db('testonly.sqlite')
     jobs.create_table(cursor, jobs.make_column_description_from_json_dict(fake_row), fake_table)
     result_cursor = cursor.execute(f"SELECT name from sqlite_master where (name = '{fake_table}')")
-    results = result_cursor.rowcount
+    """results = result_cursor.rowcount"""
     success = len(result_cursor.fetchall()) >= 1
     assert success
 
