@@ -10,6 +10,7 @@ This file handles the tests associated with COMP490 Project 1.
 
 import sqlite3
 import pytest
+import jobs
 
 
 @pytest.fixture
