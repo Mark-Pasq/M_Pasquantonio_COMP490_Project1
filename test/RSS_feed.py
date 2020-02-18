@@ -13,18 +13,19 @@ import feedparser
 myfeed = feedparser.parse("https://stackoverflow.com/jobs/feed")
 for item in myfeed['items']:
 
-    title = item.title
     link = item.link
+    title = item.title
     description = item.description
 
-    print(title)
     print(link)
+    print(title)
     print(description)
 
     db = sqlite3.connect('rss.sqlite')
     with db:
         cur = db.cursor()
-        cur.execute(f'''INSERT INTO main.RSSentries(title, link, description) VALUES (?, ?, ?);''', (title, link, description))
+        cur.execute(
+            f'''INSERT INTO RSSentries(link, title, description) VALUES (?, ?, ?);''', ('link', 'title', 'description'))
 
         print('Succesfull!')
 # close the cursor
