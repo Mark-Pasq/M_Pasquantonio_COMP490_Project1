@@ -31,4 +31,4 @@ for item in myfeed['items']:
 cur.close()
 
 # close the connection
-db.close()
+cur.close()
