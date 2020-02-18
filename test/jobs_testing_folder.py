@@ -111,15 +111,16 @@ def test_table_exists():
 #     """
 #     connection = sqlite3.connect('testonly.sqlite')
 #     cursor_object = connection.cursor()
-#     cursor_object.execute(
-#         f'''CREATE TABLE IF NOT EXISTS test_table (id, type, url, created_at, company, company_url, location, title, description, how_to_apply, company_logo)''')
+#     cursor_object.execute(f'''CREATE TABLE IF NOT EXISTS test_table (id, type, url, created_at,
+#       company, company_url, location, title, description, how_to_apply, company_logo)''')
 #     cursor_object.execute(
 #         f''' INSERT INTO test_table VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);''',
 #         ('XYZ%^&12345', 'Remote', 'http://wwww.me.org', 2020 - 12 - 25,
 #          'My Company, LLC', 'None', 'Your moms house', 'stud-muffin', 'blah blah blah',
 #          'Dont not worth it', 'None'))
 #     cursor_object.execute(f'''INSERT INTO test_table VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'''
-#         (0o12345, 'Full Time', 98089, None, 'company: None', None, Home, 'Teacher', WOrd!!!, 'how_to_apply: None', 'company_logo: None'))
+#         (0o12345, 'Full Time', 98089, None, 'company: None', None, Home, 'Teacher',
+#         WOrd!!!, 'how_to_apply: None', 'company_logo: None'))
 #
 #     connection.commit()
 #     connection.close()
