@@ -75,12 +75,10 @@ def test_get_location():
     """
     connection = sqlite3.connect('jobdemo.sqlite')
     cursor_object = connection.cursor()
-    cursor_object.execute(
-        f'''CREATE TABLE IF NOT EXISTS hardcode_github_jobs (id, type, url, created_at, company, company_url, location, 
-        title, description, how_to_apply, company_logo);''')
-    cursor_object.execute(
-        f''' SELECT type, location FROM hardcode_github_jobs WHERE location ='Munich, Germany' and 
-        type = 'Full Time' ''')
+    cursor_object.execute(f'''CREATE TABLE IF NOT EXISTS hardcode_github_jobs (id, type, url, created_at,
+        company, company_url, location, title, description, how_to_apply, company_logo);''')
+    cursor_object.execute(f''' SELECT type, location FROM hardcode_github_jobs
+        WHERE location ='Munich, Germany' and type = 'Full Time' ''')
     connection.commit()
     connection.close()
 
