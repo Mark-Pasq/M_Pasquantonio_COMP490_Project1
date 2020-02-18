@@ -3,7 +3,7 @@
 # Mark Pasquantonio
 # Senior Design and Dev COMP490
 # Project 1 JobsAssignment Sprint 2
-# Filename: test_jobs.py
+# Filename: jobs_testing_folder.py
 """
 This file handles the tests associated with COMP490 Project 1.
 """
