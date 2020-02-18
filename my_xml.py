@@ -5,15 +5,6 @@
 # Project 1 JobsAssignment Sprint 3
 # Filename: my_xml.py
 
-# """
-# This one works, but I didn't have to use it.  It has been retained for posterity.
-# """
-# import xml.dom.minidom
-# with open('feed.xml') as xml_data:
-#     xml = xml.dom.minidom.parseString(xml_data.read())  # or xml.dom.minidom.parseString(xml_string)
-#     xml_pretty_str = xml.toprettyxml()
-# print(xml_pretty_str)
-
 
 from xml.etree import ElementTree
 
@@ -45,3 +36,12 @@ def indent(elem, level=0):
 root = ElementTree.parse('feed.xml').getroot()
 indent(root)
 ElementTree.dump(root)
+
+# """
+# This one works, but I didn't have to use it.  It has been retained for posterity.
+# """
+# import xml.dom.minidom
+# with open('feed.xml') as xml_data:
+#     xml = xml.dom.minidom.parseString(xml_data.read())  # or xml.dom.minidom.parseString(xml_string)
+#     xml_pretty_str = xml.toprettyxml()
+# print(xml_pretty_str)
