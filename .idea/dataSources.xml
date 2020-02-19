@@ -13,7 +13,7 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test/testonly.sqlite</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="jobdemo.sqlite" uuid="8da7620c-e3f9-4b8b-aa6f-45fe359dc8a6">
+    <data-source source="LOCAL" name="jobdemo.sqlite" uuid="e98c4fe9-17b5-402d-8bee-b138b524dca6">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

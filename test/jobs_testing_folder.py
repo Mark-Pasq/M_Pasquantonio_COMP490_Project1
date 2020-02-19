@@ -26,17 +26,21 @@ def test_jobs_dict(get_data):
 
 
 def test_jobs_data(get_data):
-    # any real data should have both full time and Contract
-    # jobs in the list, assert this
+    """
+    This test tests the validity of the data in the 'jobdemo.sqlite' database.  First it sets the parameters as false,
+    then they enter the for loop to determine if the conditions are met, and then we assert the answer.  In this case,
+    since there is no location in the database that matches the test parameters, the test will give a failed output.
+    """
     data = get_data
-    full_time_found = False
-    contract_found = False
+    location_found = False
+    company_found = False
     for item in data:
-        if item['type'] == 'Contract':
-            contract_found = True
-        elif item['type'] == 'Full Time':
-            full_time_found = True
-    assert contract_found and full_time_found
+        if item['location'] == 'Plymouth, Massachusetts':
+            location_found = True
+        elif item['company'] == 'Microsoft':
+            company_found = True
+    assert company_found and location_found, "failed test"
+    print('There is not a location in the "jobdemo.sqlite" database named Plymouth, Massachusetts.')
 
 
 def test_save_data_to_file():
@@ -55,7 +59,6 @@ def test_check_if_table_exists():
     """
     This test checks to see if the table 'RSSentries' actually exists in the 'rss.sqlite' database.  This test will
     return a favorable answer.
-    :return:
     """
     connection = sqlite3.connect('testonly.sqlite')
     cursor_object = connection.cursor()
@@ -79,8 +82,6 @@ def test_get_location():
         company, company_url, location, title, description, how_to_apply, company_logo);''')
     cursor_object.execute(f''' SELECT type, location FROM hardcode_github_jobs
         WHERE location ='Munich, Germany' and type = 'Full Time' ''')
-    connection.commit()
-    connection.close()
 
 
 def test_table_exists():
@@ -88,7 +89,6 @@ def test_table_exists():
     This test takes the 'test_table' table in the 'testonly.sqlite' database and injects a fake row with fake data.
     The test attempts to see if the test can see if the fake table exists in the testing database.  This test
     will return a favorable answer.
-    :return:
     """
     fake_table = 'test_table'
     fake_row = {'id': 'F$RT%YH&', 'type': 'Remote', 'url': 'http://wwww.fakedata.com', 'created_at': '02-12-2020',
@@ -103,27 +103,24 @@ def test_table_exists():
     assert success
 
 
-# def test_insertion_of_data():
-#     """
-#     This test will check to see if 'test_table" table in the 'testonly.sqlite' database will accept both good data
-#     AND bad data through an sqlite INSERT INTO command.
-#     :return:
-#     """
-#     connection = sqlite3.connect('testonly.sqlite')
-#     cursor_object = connection.cursor()
-#     cursor_object.execute(f'''CREATE TABLE IF NOT EXISTS test_table (id, type, url, created_at,
-#       company, company_url, location, title, description, how_to_apply, company_logo)''')
-#     cursor_object.execute(
-#         f''' INSERT INTO test_table VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);''',
-#         ('XYZ%^&12345', 'Remote', 'http://wwww.me.org', 2020 - 12 - 25,
-#          'My Company, LLC', 'None', 'Your moms house', 'stud-muffin', 'blah blah blah',
-#          'Dont not worth it', 'None'))
-#     cursor_object.execute(f'''INSERT INTO test_table VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'''
-#         (0o12345, 'Full Time', 98089, None, 'company: None', None, Home, 'Teacher',
-#         WOrd!!!, 'how_to_apply: None', 'company_logo: None'))
-#
-#     connection.commit()
-#     connection.close()
+def test_insertion_of_data():
+    """
+        This test will check to see if 'test_table" table in the 'testonly.sqlite' database will accept both good data
+        AND bad data through an sqlite INSERT INTO command.
+        """
+    connection = sqlite3.connect('testonly.sqlite')
+    cursor_object = connection.cursor()
+    cursor_object.execute(f'''CREATE TABLE IF NOT EXISTS test_table (id, type, url, created_at,
+          company, company_url, location, title, description, how_to_apply, company_logo)''')
+    cursor_object.execute(
+        f''' INSERT INTO test_table VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);''',
+        ('XYZ%^&123456789', 'Remote', 'http://wwww.me.org', 2020 - 12 - 25,
+         'My Company, LLC', 'None', 'Your moms house', 'stud-muffin', 'blah blah blah',
+         'Dont not worth it', 'None'))
+    # cursor_object.execute(
+    #     f'''INSERT INTO test_table VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);''',
+    #     (0o12345, 'Full Time', 98089, 'None', 'company: None', 'None', 'Home1',
+    #      'Teacher', 'WOrd!!', 'how_to_apply: None', 'company_log: None'))
 
 
 def read_from_database():
@@ -145,7 +142,10 @@ def test_read_from_database():
     sql = "SELECT * FROM hardcode_github_jobs WHERE company = ?"
     for row in cursor_object.execute(sql, (company,)):
         assert cursor_object.execute(sql, (company,)) == 'Microsoft'
-        print(row)
+        print(row[31]), 'test passes!'
 
-    read_from_database()
-    connection.close()
+
+def test_delete_an_item_from_table():
+    connection = sqlite3.connect('rss.sqlite')
+    cursor_object = connection.cursor()
+    cursor_object.execute('DELETE from RSSentries WHERE rowid=500')
