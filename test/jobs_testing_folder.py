@@ -149,3 +149,35 @@ def test_delete_an_item_from_table():
     connection = sqlite3.connect('rss.sqlite')
     cursor_object = connection.cursor()
     cursor_object.execute('DELETE from RSSentries WHERE rowid=500')
+
+
+def delete_and_update():
+    conn = sqlite3.connect('rss.sqlite')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM RSSentries;')
+    print('We have deleted', cursor.rowcount, 'records from the table.')
+
+    conn.commit()
+    conn.close()
+
+
+delete_and_update()
+
+
+def main():
+    get_data()
+    test_jobs_dict(get_data)
+    test_jobs_data(get_data)
+    test_save_data_to_file()
+    test_check_if_table_exists()
+    test_get_location()
+    test_table_exists()
+    test_insertion_of_data()
+    read_from_database()
+    test_read_from_database()
+    test_delete_an_item_from_table()
+    delete_and_update()
+
+
+if __name__ == '__main__':
+    main()

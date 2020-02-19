@@ -12,7 +12,6 @@ import feedparser
 
 myfeed = feedparser.parse("https://stackoverflow.com/jobs/feed")
 for item in myfeed['items']:
-
     link = item.link
     title = item.title
     description = item.description
@@ -25,7 +24,8 @@ for item in myfeed['items']:
     with db:
         cur = db.cursor()
         cur.execute(
-            f'''INSERT INTO RSSentries(link, title, description) VALUES (?, ?, ?);''', ('link', 'title', 'description'))
+            f'''INSERT INTO main.RSSentries(link, title, description) VALUES (?, ?, ?);''',
+            ('link', 'title', 'description'))
 
         print('Succesfull!')
 # close the cursor
