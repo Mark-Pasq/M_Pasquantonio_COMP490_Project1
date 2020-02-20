@@ -11,22 +11,21 @@ functions throughout the testing folder..
 """
 import xml.dom.minidom
 
-
 with open('feed.xml') as xml_data:
     xml = xml.dom.minidom.parseString(xml_data.read())  # or xml.dom.minidom.parseString(xml_string)
     xml_pretty_str = xml.toprettyxml()
 print(xml_pretty_str)
 
+from xml.etree import ElementTree
 
-# from xml.etree import ElementTree
-#
-# """
-# This function indent() sets up the element tree to be able to view humanly, the output
-# of the data from the Stack Overflow Jobs link for Sprint 3.  It helped to identify
-# the necessary column headers for the new table 'RSSentries'.  I decided not to use it,
-# but to leave it as an example.  It was saved for prosperity.
-# """
-#
+"""
+This function indent() sets up the element tree to be able to view humanly, the output
+of the data from the Stack Overflow Jobs link for Sprint 3.  It helped to identify
+the necessary column headers for the new table 'RSSentries'.  I decided not to use it,
+but to leave it as an example.  It was saved for prosperity.
+"""
+
+
 # def indent(elem, level=0):
 #     i = "\n" + level * "    "
 #     j = "\n" + (level - 1) * "    "

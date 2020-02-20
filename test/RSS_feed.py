@@ -10,6 +10,8 @@ This file handles the parsing of an rss feed.  It also populates the table.
 import sqlite3
 import feedparser
 
+global num_of_rows
+
 myfeed = feedparser.parse("https://stackoverflow.com/jobs/feed")
 for item in myfeed['items']:
     link = item.link
@@ -23,13 +25,7 @@ for item in myfeed['items']:
     db = sqlite3.connect('rss.sqlite')
     with db:
         cur = db.cursor()
-        cur.execute(
-            f'''INSERT INTO main.RSSentries(link, title, description) VALUES (?, ?, ?);''',
-            ('link', 'title', 'description'))
-
-        print('Succesfull!')
-# close the cursor
-cur.close()
-
-# close the connection
-cur.close()
+        cur.execute(f'''INSERT INTO main.RSSentries(link, title, description) VALUES (?, ?, ?);''', (item['link'],
+                                                                                                     item['title'],
+                                                                                                     item[
+                                                                                                         'description']))

@@ -123,16 +123,16 @@ def test_insertion_of_data():
     #      'Teacher', 'WOrd!!', 'how_to_apply: None', 'company_log: None'))
 
 
-def read_from_database():
-    pass
-
-
 def test_read_from_database():
     """
     This test tests the ability to be able to read a specific item in a particular row correctly.  Here, we
     check to see if row 31 of the table 'hardcode_github_jobs' in 'jobdemo.sqlite' yields the answer
     company == Microsoft, which it does.  The test gives a favorable answer.
     """
+
+    def read_from_database():
+        pass
+
     connection = sqlite3.connect('jobdemo.sqlite')
     cursor_object = connection.cursor()
     sql = f'''SELECT * FROM hardcode_github_jobs'''
@@ -145,39 +145,31 @@ def test_read_from_database():
         print(row[31]), 'test passes!'
 
 
-def test_delete_an_item_from_table():
-    connection = sqlite3.connect('rss.sqlite')
-    cursor_object = connection.cursor()
-    cursor_object.execute('DELETE from RSSentries WHERE rowid=500')
-
-
-def delete_and_update():
+def test_delete_and_update():
     conn = sqlite3.connect('rss.sqlite')
     cursor = conn.cursor()
     cursor.execute('DELETE FROM RSSentries;')
     print('We have deleted', cursor.rowcount, 'records from the table.')
-
+    # cursor.execute('DELETE FROM hardcode_github_jobs')
+    print('We have deleted', cursor.rowcount, 'records from the table.')
     conn.commit()
     conn.close()
 
 
-delete_and_update()
+test_delete_and_update()
+
+
+def test_delete_an_item_from_table():
+    def row():
+        pass
+
+    connection = sqlite3.connect('rss.sqlite')
+    cursor_object = connection.cursor()
+    cursor_object.execute('DELETE from RSSentries WHERE rowid = 500')
+    connection.commit()
+    connection.close()
 
 
 def main():
-    get_data()
-    test_jobs_dict(get_data)
-    test_jobs_data(get_data)
-    test_save_data_to_file()
-    test_check_if_table_exists()
-    test_get_location()
-    test_table_exists()
-    test_insertion_of_data()
-    read_from_database()
-    test_read_from_database()
-    test_delete_an_item_from_table()
-    delete_and_update()
-
-
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        main()
