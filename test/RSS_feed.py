@@ -26,6 +26,4 @@ for item in myfeed['items']:
     with db:
         cur = db.cursor()
         cur.execute(f'''INSERT INTO main.RSSentries(link, title, description) VALUES (?, ?, ?);''', (item['link'],
-                                                                                                     item['title'],
-                                                                                                     item[
-                                                                                                         'description']))
+                                item['title'], item['description']))
