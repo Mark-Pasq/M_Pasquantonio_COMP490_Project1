@@ -182,7 +182,7 @@ import sqlite3
 from geopy import Nominatim
 
 
-def find_lat_long_of_locations():
+def find_lat_long_of_locations(latitude=None, longitude=None):
     geolocator = Nominatim(user_agent="GoogleMaps", timeout=1)
     connection = sqlite3.connect('rss.sqlite')
     cur = connection.cursor()
@@ -191,8 +191,7 @@ def find_lat_long_of_locations():
     rows = cur.fetchall()
     for data in rows:
         location = geolocator.geocode(data)
-        # cur.execute('INSERT INTO hardcode_github_jobs(latitude, longitude) VALUES (?, ?)',
-        #             data['latitude'], data['longitude'])
+        cur.execute('''UPDATE TABLE RSSentries VALUES (?, ?);''', (data[latitude], data[longitude]))
         try:
             print(location.address)
             print(location.latitude, location.longitude)
