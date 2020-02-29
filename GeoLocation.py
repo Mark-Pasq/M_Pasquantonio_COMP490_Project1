@@ -12,36 +12,12 @@ in the database.  It will give addresses and latitudinal
 import sqlite3
 from geopy.geocoders import Nominatim
 
-global geolocator
-
 
 geolocator = Nominatim(user_agent="GoogleMaps")
 location = geolocator.geocode("23 Winding Way Plymouth Massachusetts")
 print(location.address)
 print((location.latitude, location.longitude))
 
-
-def find_lat_long_of_locations():
-    geolocator = Nominatim(user_agent="GoogleMaps", timeout=5)
-    conn = sqlite3.connect('jobdemo.sqlite')
-    cur = conn.cursor()
-    cur.execute('SELECT title FROM hardcode_github_jobs')
-    rows = cur.fetchall()
-    for data in rows:
-        location = geolocator.geocode(data)
-        cur.execute('INSERT INTO hardcode_github_jobs (latitude, longitude) VALUES (?, ?)',
-                    (data['latitude'], data['longitude']))
-        try:
-            print(location.address)
-            print(location.latitude, location.longitude)  #
-        except AttributeError:
-            print('missing entry found')
-    print('=========================================')
-    print("The total rows in the database is:  ", len(rows))
-    print('=========================================')
-
-
-find_lat_long_of_locations()
 
 global sqlite_connection
 
@@ -55,21 +31,55 @@ def query_job_locations():
         sql_select_query = """select * from hardcode_github_jobs"""
         cursor.execute(sql_select_query)
         records = cursor.fetchall()
-        print("Total rows are:  ", len(records))
-        print("Printing each row")
+
         for row in records:
             print('============================')
             print("company = ", row[4])
             print("location  = ", row[6])
             print("description  = ", row[7])
             print("title  = ", row[8])
+
+            sqlite_connection.commit()
             cursor.close()
     except sqlite3.Error as error:
         print("Failed to read data from sqlite table", error)
-    # finally:
-    #     if sqlite_connection:
-    #         sqlite_connection.close()
-    #         print("The SQLite connection is closed")
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("The SQLite connection is closed")
 
 
 query_job_locations()
+
+
+# def find_lat_long_of_locations():
+#     global hardcore_github_jobs
+#     geolocator = Nominatim(user_agent="GoogleMaps", timeout=5)
+#     conn = sqlite3.connect('jobdemo.sqlite[2]')
+#     cur = conn.cursor()
+#     # cur.execute('SELECT title FROM hardcode_github_jobs')
+#     print('The system is up and running')
+#     try:
+#         cur.execute("ALTER TABLE hardcode_github_jobs ADD COLUMN latitude DECIMAL(9,6)")
+#         cur.execute("ALTER TABLE hardcode_github_jobs ADD COLUMN longitude DECIMAL(9,6)")
+#     except:
+#         rows = cur.fetchall()
+#         for data in rows:
+#             location = geolocator.geocode(data)
+#
+#             print("Already added columns, skipping that part")
+#             hardcore_github_jobs = hardcore_github_jobs.select()
+#
+#             for hardcore_github_jobs in hardcore_github_jobs:
+#                 print(hardcore_github_jobs.full_address())
+#
+#             print(location.address)
+#             print(location.latitude, location.longitude)  #
+#
+#             print('missing entry found')
+#             print('=========================================')
+#             print("The total rows in the database is:  ", len(rows))
+#             print('=========================================')
+#
+#
+# find_lat_long_of_locations()

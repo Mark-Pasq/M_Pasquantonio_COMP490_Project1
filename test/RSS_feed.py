@@ -7,40 +7,47 @@
 """
 This file handles the parsing of an rss feed.  It also populates the table.
 """
+#
+################################################################################################################
 import sqlite3
-import feedparser
-from geopy import Nominatim
+import time
+from geopy.geocoders import Nominatim
 
-global num_of_rows
 
-myfeed = feedparser.parse("https://stackoverflow.com/jobs/feed")
-for item in myfeed['items']:
-    link = item.link
-    title = item.title
-    description = item.description
+# geolocator = Nominatim(user_agent="GoogleMaps")
+# cnx = sqlite3.connect('rss.sqlite')
+# cur = cnx.cursor()
+# cur.execute('''CREATE TABLE IF NOT EXISTS latlong_locations(latitude TEXT, longitude TEXT);''')
+# cur.execute('''SELECT description FROM RSSentries''')
+#
+# rows = cur.fetchall()
+# for data in rows:
+#
+#     time.sleep(.5)
+#     location = geolocator.geocode(data)
+#     try:
+#         print(location.latitude, location.longitude)
+#         cur.execute(''' INSERT INTO latlong_locations( latitude, longitude) VALUES (?,?)''',
+#                     (location.latitude, location.longitude))
+#     except AttributeError:
+#         cur.execute(''' INSERT INTO latlong_locations( latitude, longitude) VALUES (?,?)''', ("remote", "remote"))
 
-    print(link)
-    print(title)
-    print(description)
 
-    db = sqlite3.connect('rss.sqlite')
-    with db:
-        cur = db.cursor()
-        cur.execute(f'''INSERT INTO main.RSSentries(link, title, description)
-                        VALUES (?, ?, ?);''', (item['link'], item['title'], item['description']))
+######################################################################################################################
 
 
 def find_lat_long_of_locations():
     geolocator = Nominatim(user_agent="GoogleMaps", timeout=5)
-    conn = sqlite3.connect('rss.sqlite')
-    c_u = conn.cursor()
-    cur.execute('SELECT title FROM RSSentries')
+    cxn = sqlite3.connect('jobdemo.sqlite[2]')
+    cur = cxn.cursor()
+    cur.execute(f"CREATE TABLE IF NOT EXISTS latlong_locations(id TEXT, latitude REAL, longitude REAL);")
+    cur.execute('SELECT location FROM hardcode_github_jobs')
 
-    rows = c_u.fetchall()
+    rows = cur.fetchall()
     for data in rows:
         location = geolocator.geocode(data)
-        # cur.execute('INSERT INTO hardcode_github_jobs(latitude, longitude) VALUES (?, ?)',
-        #             data['latitude'], data['longitude'])
+        cur.execute('INSERT INTO latlong_locations(latitude, longitude) VALUES (?, ?)',
+                    (data['latitude'], data['longitude']))
         try:
 
             print(location.address)

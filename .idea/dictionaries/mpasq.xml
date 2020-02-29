@@ -1,9 +1,12 @@
 <component name="ProjectDictionaryState">
   <dictionary name="mpasq">
     <words>
+      <w>geocoding</w>
       <w>geolocator</w>
+      <w>gmaps</w>
       <w>hardcode</w>
       <w>jobdemo</w>
+      <w>latlong</w>
       <w>minidom</w>
       <w>myfeed</w>
       <w>newexpertise</w>
@@ -14,6 +17,8 @@
       <w>subelem</w>
       <w>succesfull</w>
       <w>testonly</w>
+      <w>udgr</w>
+      <w>vate</w>
     </words>
   </dictionary>
 </component>
