@@ -8,16 +8,15 @@ df = pd.read_excel(r'C:\Users\mpasq\PycharmProjects\M_Pasquantonio_COMP490_Proje
 fig = plt.figure(figsize=(12, 9))
 
 m = Basemap(projection='mill',
-            llcrnrlat=20,
-            urcrnrlat=60,
-            llcrnrlon=-130,
-            urcrnrlon=-60,
+            llcrnrlat=-90,   # 20 Gives map of US
+            urcrnrlat=90,   # 60
+            llcrnrlon=-180, # -130
+            urcrnrlon=180,  # -60
             resolution='c')
 
 m.drawcoastlines()
 m.drawcountries(color='blue')
 m.drawstates(color='red')
-# m.drawrivers(color='blue')
 
 m.drawmapboundary(color='pink', linewidth=10, fill_color='lightblue')
 
