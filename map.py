@@ -19,10 +19,10 @@ import matplotlib.pyplot as plt
 geo_locator = Nominatim(user_agent='GoogleMaps')
 cxn = sqlite3.connect('job_demo.sqlite')
 cur = cxn.cursor()
-cur.execute('DELETE FROM main.lat_long_locations;')
+cur.execute('DELETE FROM lat_long_locations;')
 cur.execute(
-    '''CREATE TABLE IF NOT EXISTS main.lat_long_locations(id INTEGER PRIMARY KEY, latitude REAL, longitude REAL);''')
-cur.execute('''SELECT location FROM main.github_jobs;''')
+    '''CREATE TABLE IF NOT EXISTS lat_long_locations(id INTEGER PRIMARY KEY, latitude REAL, longitude REAL, location TEXT);''')
+cur.execute('''SELECT location FROM github_jobs;''')
 # cur.execute("SELECT * FROM github_jobs ORDER BY created_at DESC LIMIT 1;")
 rows = cur.fetchall()
 counter = 0
@@ -30,18 +30,18 @@ for items in rows:
     counter = counter + 1
     time.sleep(.5)
     location = geo_locator.geocode(items)
-    if counter > 10:
+    if counter > 100:
         break
     try:
         if location is None:
             continue
         print(location.longitude, location.latitude)
         print(counter)
-        cur.execute(f'''INSERT INTO main.lat_long_locations(latitude, longitude) VALUES (?, ?);''',
-                    (location.longitude, location.latitude))
+        cur.execute(f'''INSERT INTO lat_long_locations(latitude, longitude) VALUES (?, ?);''',
+                    (location.latitude, location.longitude))
 
     except AttributeError:
-        cur.execute(f'''INSERT INTO main.lat_long_locations( latitude, longitude) VALUES (?, ?)''',
+        cur.execute(f'''INSERT INTO lat_long_locations( latitude, longitude) VALUES (?, ?);''',
                     ("remote", "remote"))
 
 cxn.commit()
