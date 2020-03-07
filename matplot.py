@@ -1,31 +1,30 @@
-from mpl_toolkits.basemap import Basemap
-import matplotlib.pyplot as plt
-import numpy
+# !/usr/bin/env python3
+
+# Mark Pasquantonio
+# Senior Design and Dev COMP490 Project 1
+# JobsAssignment Sprint 4
+# Filename: mapplot.py
+"""
+This file handles the ability to get geolocation on the locations of the jobs
+in the database.  It will give addresses and latitudinal
+"""
+import plotly.express as px
 import pandas as pd
+import jobs
 
-df = pd.read_excel(r'C:\Users\mpasq\PycharmProjects\M_Pasquantonio_COMP490_Project1\lat_long.xlsx', 'main_lat_long_locations')
 
-fig = plt.figure(figsize=(12, 9))
+conn, cursor = jobs.open_db("job_demo.sqlite")
+query = pd.read_sql_query('''SELECT * FROM github_jobs''', conn)
 
-m = Basemap(projection='mill',
-            llcrnrlat=-90,   # 20 Gives map of US
-            urcrnrlat=90,   # 60
-            llcrnrlon=-180, # -130
-            urcrnrlon=180,  # -60
-            resolution='c')
+df_from_table = pd.DataFrame(query, columns=['id', 'type', 'url', 'created_at', 'company', 'company_url', 'location',
+                                             'title', 'longitude', 'latitude'])
 
-m.drawcoastlines()
-m.drawcountries(color='blue')
-m.drawstates(color='red')
+pd.set_option('display.max_columns', None)
+print(df_from_table)
 
-m.drawmapboundary(color='pink', linewidth=10, fill_color='lightblue')
+fig = px.scatter_mapbox(df_from_table, lat='latitude', lon='longitude', hover_name='id', hover_data=['type', 'company',
+                                    'created_at', 'title'], color_discrete_sequence=["fuchsia"], zoom=3, height=900)
 
-m.fillcontinents(color='lightgreen', lake_color='blue', zorder=0)
-
-sites_lat_x = df['longitude'].tolist()
-sites_lon_y = df['latitude'].tolist()
-
-m.scatter(sites_lon_y, sites_lat_x, latlon=True, s=500, marker='*', edgecolor='k')
-# m.scatter(-135, 40, latlon=True, s=250, marker='*', edgecolor='k')
-
-plt.show()
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig.show()

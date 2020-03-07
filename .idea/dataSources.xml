@@ -7,7 +7,7 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test/rss.sqlite</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="job_demo.sqlite" uuid="350ff3f6-f98b-4842-a404-685858cc969b">
+    <data-source source="LOCAL" name="job_demo.sqlite" uuid="880d7b44-f879-46d5-aa3f-d04bd5bded2e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
