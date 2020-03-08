@@ -12,7 +12,7 @@ to display a interactive GUI to search the job listings.
 import os
 import sqlite3
 import sys
-import jobs
+
 from PyQt5.uic.properties import QtWidgets
 from PyQt5.QtWidgets import QPushButton, QTableWidgetItem
 from PyQt5.QtWidgets import QMessageBox
@@ -130,24 +130,24 @@ class MainWindow(QWidget):
     #     finish = str(self.endDate.text())
     #     self.model.setFilter("EventDate BETWEEN'" + start and finish)
 
-    def search_location(self):
-        global row_number
-        value = self.searchLocationEntryTextBox.text()
-        if value == '':
-            QMessageBox.Information(self, "Warning!!!", "Search query cannot be completed at this time!!!")
-        else:
-            self.searchLocationEntryTextBox.setText("")
-            query = "SELECT * FROM lat_long_locations WHERE location LIKE ?"
-            results = cursor.execute(query, ('%' + value + '%')).fetchall()
-            if not results:
-                QMessageBox.information((self, "Warning!!!", "There is no such location!!!"))
-            else:
-                for i in reversed(range(self.github_jobs.rowCount())):
-                    self.github_jobs.removeRow(i)
-                for row_data in results:
-                    row_number = self.github_jobs.insertRow.rowCount()
-                    for column_number, data in enumerate(row_data):
-                        self.github_jobs.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+    # def search_location(self):
+    #     global row_number
+    #     value = self.searchLocationEntryTextBox.text()
+    #     if value == '':
+    #         QMessageBox.Information(self, "Warning!!!", "Search query cannot be completed at this time!!!")
+    #     else:
+    #         self.searchLocationEntryTextBox.setText("")
+    #         query = "SELECT * FROM lat_long_locations WHERE location LIKE ?"
+    #         results = cursor.execute(query, ('%' + value + '%')).fetchall()
+    #         if not results:
+    #             QMessageBox.information((self, "Warning!!!", "There is no such location!!!"))
+    #         else:
+    #             for i in reversed(range(self.github_jobs.rowCount())):
+    #                 self.github_jobs.removeRow(i)
+    #             for row_data in results:
+    #                 row_number = self.github_jobs.insertRow.rowCount()
+    #                 for column_number, data in enumerate(row_data):
+    #                     self.github_jobs.setItem(row_number, column_number, QTableWidgetItem(str(data)))
 
 
 def searchLocationEntryTextBox():

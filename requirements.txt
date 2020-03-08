@@ -1,3 +1,4 @@
+unidecode
 geolocator
 px
 matplotlib

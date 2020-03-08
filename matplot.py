@@ -5,8 +5,8 @@
 # JobsAssignment Sprint 4
 # Filename: mapplot.py
 """
-This file handles the ability to get geolocation on the locations of the jobs
-in the database.  It will give addresses and latitudinal
+This file handles the ability to get geolocation information on the locations of the jobs
+in the github jobs database only.
 """
 import plotly.express as px
 import pandas as pd
@@ -23,7 +23,7 @@ pd.set_option('display.max_columns', None)
 print(df_from_table)
 
 fig = px.scatter_mapbox(df_from_table, lat='latitude', lon='longitude', hover_name='id', hover_data=['type', 'company',
-                                    'created_at', 'title'], color_discrete_sequence=["fuchsia"], zoom=3, height=900)
+                        'created_at', 'title'], color_discrete_sequence=["black"], zoom=3, height=900)
 
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
