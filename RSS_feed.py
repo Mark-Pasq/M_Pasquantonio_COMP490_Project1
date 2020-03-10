@@ -41,5 +41,5 @@ for key in feed['entries']:
         cxn = sqlite3.connect('rss.sqlite')
         cur = cxn.cursor()
         cur.execute(f'''INSERT INTO rssfeed(
-                        link, title, description, latitude, longitude) 
-                        VALUES (?,?,?,?,?)''', (key['link'], key['title'], key['description'], 0.0, 0.0))
+                    link, title, description, latitude, longitude) VALUES (?,?,?,?,?)''', (key['link'], key['title'],
+                                                                                           key['description'], 0.0, 0.0))
