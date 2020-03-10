@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="mpasq">
     <words>
+      <w>centralwidget</w>
       <w>geocoding</w>
       <w>geolocator</w>
       <w>gmaps</w>
@@ -14,11 +15,13 @@
       <w>newexpertise</w>
       <w>nominatim</w>
       <w>pasquantonio</w>
+      <w>retranslate</w>
       <w>rssfeed</w>
       <w>santore</w>
       <w>sfeeds</w>
       <w>subelem</w>
       <w>succesfull</w>
+      <w>tahoma</w>
       <w>testonly</w>
       <w>udgr</w>
       <w>unidecode</w>

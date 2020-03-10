@@ -15,7 +15,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, Main_Window):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 600)
         font = QtGui.QFont()
@@ -128,42 +128,40 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi()
         self.pushButtonSearchDates.clicked.connect(self.lineEditDateToSearch.selectAll)
         self.pushButtonSearchDates.clicked.connect(self.lineEditDateFromSearch.selectAll)
         self.pushButtonSearchCompany.clicked.connect(self.lineEditSearchCompany.selectAll)
         self.pushButtonSearchLocation.clicked.connect(self.lineEditSearchLocation.selectAll)
         self.pushButtonSearchTechnology.clicked.connect(self.lineEditSearchTechnology.selectAll)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(Main_Window)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        MainWindow.setStatusTip(_translate("MainWindow", "Enter your date to search here!"))
-        self.labelMainWindow.setText(_translate("MainWindow", "Jobs Posting Search Application"))
-        self.lineEditDateToSearch.setStatusTip(_translate("MainWindow", "Enter your date to search to here!"))
-        self.lineEditDateFromSearch.setStatusTip(_translate("MainWindow", "Enter your date to search from here!"))
-        self.labelDateTo.setText(_translate("MainWindow", "Date To:"))
-        self.labelDateFrom.setText(_translate("MainWindow", "Date From:"))
-        self.labelSearchDates.setText(_translate("MainWindow", "Search Dates:"))
-        self.pushButtonSearchDates.setStatusTip(_translate("MainWindow", "Click to search!"))
-        self.pushButtonSearchDates.setText(_translate("MainWindow", "Search!"))
-        self.lineEditSearchCompany.setStatusTip(_translate("MainWindow", "Enter the company to search for here!"))
-        self.pushButtonSearchCompany.setStatusTip(_translate("MainWindow", "Click to search!"))
-        self.pushButtonSearchCompany.setText(_translate("MainWindow", "Search!"))
-        self.labelSearchCompany.setText(_translate("MainWindow", "Search Company:"))
-        self.lineEditSearchLocation.setStatusTip(
-            _translate("MainWindow", "Enter a geographical location to search for here!"))
-        self.pushButtonSearchLocation.setStatusTip(_translate("MainWindow", "Click to search!"))
-        self.pushButtonSearchLocation.setText(_translate("MainWindow", "Search!"))
-        self.pushButtonSearchTechnology.setStatusTip(_translate("MainWindow", "Click to search!"))
-        self.pushButtonSearchTechnology.setText(_translate("MainWindow", "Search!"))
-        self.lineEditSearchTechnology.setStatusTip(
-            _translate("MainWindow", "Enter a technology, like Python, Java, PhP, AI, etc., to search for!"))
-        self.labelSearchLocation.setText(_translate("MainWindow", "Search Location:"))
-        self.labelSearchTechnology.setText(_translate("MainWindow", "Search Technology:"))
-        self.pushButtonExit.setStatusTip(_translate("MainWindow", "Click to exit the application!"))
-        self.pushButtonExit.setText(_translate("MainWindow", "Exit!"))
+        MainWindow.setWindowTitle_translate("MainWindow", "MainWindow")
+        MainWindow.setStatusTip_translate("MainWindow", "Enter your date to search here!")
+        self.labelMainWindow.setText_translate("MainWindow", "Jobs Posting Search Application")
+        self.lineEditDateToSearch.setStatusTip_translate("MainWindow", "Enter your date to search to here!")
+        self.lineEditDateFromSearch.setStatusTip_translate("MainWindow", "Enter your date to search from here!")
+        self.labelDateTo.setText_translate("MainWindow", "Date To:")
+        self.labelDateFrom.setText_translate("MainWindow", "Date From:")
+        self.labelSearchDates.setText_translate("MainWindow", "Search Dates:")
+        self.pushButtonSearchDates.setStatusTip_translate("MainWindow", "Click to search!")
+        self.pushButtonSearchDates.setText_translate("MainWindow", "Search!")
+        self.lineEditSearchCompany.setStatusTip_translate("MainWindow", "Enter the company to search for here!")
+        self.pushButtonSearchCompany.setStatusTip_translate("MainWindow", "Click to search!")
+        self.pushButtonSearchCompany.setText_translate("MainWindow", "Search!")
+        self.labelSearchCompany.setText_translate("MainWindow", "Search Company:")
+        self.lineEditSearchLocation.setStatusTip_translate("MainWindow", "Enter a geographical location to search for here!")
+        self.pushButtonSearchLocation.setStatusTip_translate("MainWindow", "Click to search!")
+        self.pushButtonSearchLocation.setText_translate("MainWindow", "Search!")
+        self.pushButtonSearchTechnology.setStatusTip_translate("MainWindow", "Click to search!")
+        self.pushButtonSearchTechnology.setText_translate("MainWindow", "Search!")
+        self.lineEditSearchTechnology.setStatusTip_translate("MainWindow", "Enter a technology, like Python, Java, PhP, AI, etc., to search for!")
+        self.labelSearchLocation.setText_translate("MainWindow", "Search Location:")
+        self.labelSearchTechnology.setText_translate("MainWindow", "Search Technology:")
+        self.pushButtonExit.setStatusTip_translate("MainWindow", "Click to exit the application!")
+        self.pushButtonExit.setText_translate("MainWindow", "Exit!")
 
     def show_dialog(self):
         msg_box = QMessageBox()
@@ -190,7 +188,8 @@ class Ui_MainWindow(object):
         if return_value == self.pushButtonSearchTechnology.clicked.connect(self.slot_method):
             print("Search is clicked!")
 
-    def msg_button_clicked(self, i):
+    @staticmethod
+    def msg_button_clicked(i):
         print("Button clicked is :", i.text())
 
 
