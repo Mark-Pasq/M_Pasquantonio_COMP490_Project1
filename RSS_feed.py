@@ -32,10 +32,8 @@ for key in feed['entries']:
         print(temp_location_holder)
         cxn = sqlite3.connect('rss.sqlite')
         cur = cxn.cursor()
-
         cur.execute(f'''CREATE TABLE IF NOT EXISTS rssfeed (link INTEGER NOT NULL PRIMARY KEY ON CONFLICT IGNORE,
                 title TEXT, description TEXT, latitude REAL, longitude REAL);''')
-
         cur.execute(f''' INSERT INTO rssfeed(link, title, description, latitude, longitude) VALUES (?,?,?,?,?);''',
                     (key['link'], key['title'], key['description'], temp_location_holder.latitude,
                      temp_location_holder.longitude))

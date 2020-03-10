@@ -157,7 +157,8 @@ class Ui_MainWindow(object):
         self.pushButtonSearchLocation.setText_translate("MainWindow", "Search!")
         self.pushButtonSearchTechnology.setStatusTip_translate("MainWindow", "Click to search!")
         self.pushButtonSearchTechnology.setText_translate("MainWindow", "Search!")
-        self.lineEditSearchTechnology.setStatusTip_translate("MainWindow", "Enter a technology, like Python, Java, PhP, AI, etc., to search for!")
+        self.lineEditSearchTechnology.setStatusTip_translate("MainWindow", "Enter a technology, like Python, Java, "
+                                                                           "PhP, AI, etc., to search for!")
         self.labelSearchLocation.setText_translate("MainWindow", "Search Location:")
         self.labelSearchTechnology.setText_translate("MainWindow", "Search Technology:")
         self.pushButtonExit.setStatusTip_translate("MainWindow", "Click to exit the application!")
