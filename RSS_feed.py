@@ -5,7 +5,10 @@
 # Project 1 JobsAssignment Sprint 4
 # Filename: RSS_feed.py
 """
-This file handles the parsing of an rss feed.  It also populates the table.
+This file handles the parsing of an rss feed.  It also populates the table.  This function
+does not work as expected.  It was supposed to be added to the results of the .JSON download
+from Sprint 1.  When the green 'run' button is clicked, the function will print the results
+of the query and populate a database table.
 """
 import time
 import feedparser

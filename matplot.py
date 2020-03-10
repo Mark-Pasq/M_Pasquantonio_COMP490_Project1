@@ -6,12 +6,14 @@
 # Filename: mapplot.py
 """
 This file handles the ability to get geolocation information on the locations of the jobs
-in the github jobs database only.
+in the github jobs database only.  When you click the green 'run' button, a map will load
+and it will contain a map of the world with black dots on the map, which will signify a location
+based on latitude-longitude information gained from the original JSON download of the GitHub
+Jobs posting from Sprint 1.
 """
 import plotly.express as px
 import pandas as pd
 import jobs
-
 
 conn, cursor = jobs.open_db("job_demo.sqlite")
 query = pd.read_sql_query('''SELECT * FROM github_jobs''', conn)

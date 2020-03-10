@@ -178,23 +178,23 @@ This file handles the tests associated with COMP490 Project 1.
 #     if __name__ == '__main__':
 #         main()
 import sqlite3
-
 from geopy import Nominatim
 
+geo_locator = Nominatim(user_agent="GoogleMaps", timeout=1)
 
-def find_lat_long_of_locations(latitude=None, longitude=None):
-    geolocator = Nominatim(user_agent="GoogleMaps", timeout=1)
+
+def find_lat_long_of_locations():
     connection = sqlite3.connect('rss.sqlite')
     cur = connection.cursor()
-    cur.execute('SELECT title FROM main.RSSentries')
+    cur.execute('SELECT title FROM rssfeed')
 
     rows = cur.fetchall()
     for data in rows:
-        location = geolocator.geocode(data)
-        cur.execute('''UPDATE TABLE RSSentries VALUES (?, ?);''', (data[latitude], data[longitude]))
+        temp_location_holder = geo_locator.geocode(data['title'])
+        cur.execute('''UPDATE TABLE rssfeed VALUES (?);''', data)
         try:
-            print(location.address)
-            print(location.latitude, location.longitude)
+            print(temp_location_holder.address)
+            print(temp_location_holder.latitude, temp_location_holder.longitude)
 
         except AttributeError:
             print('missing entry found')
