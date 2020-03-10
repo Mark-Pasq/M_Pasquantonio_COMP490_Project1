@@ -137,7 +137,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(Main_Window)
 
     def retranslateUi(self):
-        _translate = QtCore.QCoreApplication.translate
+        # _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle_translate("MainWindow", "MainWindow")
         MainWindow.setStatusTip_translate("MainWindow", "Enter your date to search here!")
         self.labelMainWindow.setText_translate("MainWindow", "Jobs Posting Search Application")
