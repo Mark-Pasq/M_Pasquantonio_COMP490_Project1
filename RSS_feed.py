@@ -22,14 +22,14 @@ geo_locator = Nominatim(user_agent='GoogleMaps')
 rss = "http://stackoverflow.com/jobs/feed"
 feed = feedparser.parse(rss)
 for key in feed['entries']:
-    time.sleep(1)
+    time.sleep(.5)
     try:
         print(unidecode.unidecode(key['title']))
         # print(unidecode.unidecode(key['link']))
         # print(unidecode.unidecode(key['description']))
         temp_location_holder = geo_locator.geocode(key['title'])
         pp = pprint.PrettyPrinter(indent=4)
-        print(temp_location_holder)
+        # print(temp_location_holder)
         cxn = sqlite3.connect('rss.sqlite')
         cur = cxn.cursor()
         cur.execute(f'''CREATE TABLE IF NOT EXISTS rssfeed (link INTEGER NOT NULL PRIMARY KEY ON CONFLICT IGNORE,
