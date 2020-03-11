@@ -7,9 +7,9 @@
 """
 This file is used to filter database data.
 """
-import jobs
 import sqlite3
 import pandas as pd
+
 # cxn = sqlite3.connect('job_demo.sqlite')
 # cur = cxn.cursor()
 # cur.execute(f"SELECT location FROM github_jobs ORDER BY location ASC;")
