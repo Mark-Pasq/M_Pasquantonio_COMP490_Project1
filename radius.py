@@ -60,15 +60,16 @@ def insertIntoDistance():
     insertIntoFiftyMileRadiusTable()
     conn, cursor = establishConnection()
     cursor.execute('''DELETE FROM Distance_Table''')
-    cursor.execute('''SELECT location, latitude, longitude FROM Fifty_Mile_Radius''')
+    cursor.execute('''SELECT location, latitude, longitude FROM github_jobs''')
     rows = cursor.fetchall()
     for data in rows:
         comparative_coord = (data[1], data[2])
         distance = GeoDist.distance(comparative_coord, starting_coords).miles
-        if distance <= 200:
+        if distance <= 50:
             print(data[0])
             cursor.execute(
-                f'''INSERT OR IGNORE INTO  Distance_Table SELECT * FROM Fifty_Mile_Radius where location = "{data[0]}" ''')
+                f'''INSERT OR IGNORE INTO  Distance_Table SELECT * FROM github_jobs where location = "{data[0]}" ''')
+                # f'''INSERT INTO github_jobs SELECT * FROM RSS_pull''')
     jobs.close_db(conn)
 
 

@@ -18,7 +18,7 @@ import jobs
 conn, cursor = jobs.open_db("job_demo.sqlite")
 query = pd.read_sql_query('''SELECT * FROM github_jobs''', conn)
 
-df_from_table = pd.DataFrame(query, columns=['id', 'type', 'url', 'created_at', 'company', 'company_url', 'location',
+df_from_table = pd.DataFrame(query, columns=['id', 'type', 'url', 'created_at', 'company', 'location',
                                              'title', 'longitude', 'latitude'])
 
 pd.set_option('display.max_columns', None)
