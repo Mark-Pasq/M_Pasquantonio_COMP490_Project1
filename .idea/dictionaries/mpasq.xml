@@ -2,6 +2,7 @@
   <dictionary name="mpasq">
     <words>
       <w>centralwidget</w>
+      <w>dataframe</w>
       <w>geocoding</w>
       <w>geolocator</w>
       <w>gmaps</w>
