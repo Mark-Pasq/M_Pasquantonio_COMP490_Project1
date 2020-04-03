@@ -86,7 +86,7 @@ def insertIntoDistance():
     for data in rows:
         comparative_coord = (data[1], data[2])
         distance = geoDist.distance(comparative_coord, starting_coords).miles
-        if distance <=50:
+        if distance <= 50:
             print(data[0])
             cursor.execute(
                 f'''INSERT OR IGNORE INTO  Distance_Table SELECT * FROM Fifty_Mile_Radius where location = "{data[0]}"''')
