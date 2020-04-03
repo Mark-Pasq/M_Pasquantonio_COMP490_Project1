@@ -17,6 +17,23 @@
 # information on the web, both light and dark, so I was able to use the basic functionality of SQLite.  I can't
 # wait to see what Sprint 4 has for me.
 
-# Here is Sprint 4.
+# Here is Sprint 4.  Sprint 4 is mostly unfinished.  I have many chunks that work, but was unable to get all the
+# components to operate as thet should.
+
+# The good: 
+#           * I was able to get my original JSON file to work and it gave me the data that I needed throughout the project.
+#           * I had trouble with the RSS feed portion, and in the end, it did work once "on my machine" then I somehow broke it,
+#           and couldn't get the desired output.
+#           * I was able to create the GUI using QT Designer and created a .py file from a .ui file.  When the file is launched,
+#           it opens a nice window with options, but had trouble with the necessary code to get the search inputs working.
+#           * The map plotting is working.  I was able to take location information from the JSON download and obtain lat/long
+#           for geolocation points to be plotted.  Along with that map, it will also create a map that will show 3 jobs  from
+#           the github_jobs feed within the 50 mile radius of BSU.
+#           # I have some tests that work, but testing is where I lacked complete understanding.  More work needs to be done
+#           on my behalf to unserstand it better.
+# The bad:
+#           * I am mostly disappointed with the outcome of this project for me.  I struggle a bit with code, but this was an 
+#           excellent project to learn from.  This will be something I will finish on my own time.  This was submitted at 2:28am
+#           on Thursday 3/12/2020.
 
 
