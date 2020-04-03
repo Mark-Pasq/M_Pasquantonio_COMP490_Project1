@@ -7,11 +7,6 @@
 """
 This file is used to filter database data.
 """
-import sqlite3
-import datetime
-
-import pandas as pd
-
 
 # cxn = sqlite3.connect('job_demo.sqlite')
 # cur = cxn.cursor()
@@ -66,16 +61,35 @@ import pandas as pd
 
 #########################################################################
 
-def queryDateRange():
-    cxn = sqlite3.connect('job_demo.sqlite')
-    cur = cxn.cursor()
-    cur.execute(''' SELECT * FROM github_jobs ORDER BY created_at ''')
-    rows = cur.fetchall()
-    for items in rows:
-        print(items)
+# def queryDateRange():
+#     cxn = sqlite3.connect('job_demo.sqlite')
+#     cur = cxn.cursor()
+#     cur.execute(''' SELECT * FROM github_jobs ORDER BY created_at ''')
+#     rows = cur.fetchall()
+#     for items in rows:
+#         print(items)
+#
+#     cxn.commit()
+#     cur.close()
+#
+#
+# queryDateRange()
 
-    cxn.commit()
-    cur.close()
+################################################################################
+import sqlite3
+
+conn = sqlite3.connect('job_demo.sqlite')
+c = conn.cursor()
 
 
-queryDateRange()
+def merged():
+    c.execute(f'''DELETE FROM combined_table;''')
+    c.execute(f'''INSERT INTO combined_table SELECT * FROM github_jobs UNION SELECT * FROM rss_feed;''')
+    for line in c.fetchall():
+        print(line)
+
+
+merged()
+
+conn.commit()
+c.close()

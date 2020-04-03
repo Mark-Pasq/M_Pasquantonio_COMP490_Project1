@@ -7,12 +7,6 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\mpasq\PycharmProjects\M_Pasquantonio_COMP490_Project1\job_demo.sqlite</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="rss.sqlite" uuid="2baad93c-9399-4ef0-9176-d086d2397ca3">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\mpasq\PycharmProjects\M_Pasquantonio_COMP490_Project1\rss.sqlite</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="testonly.sqlite" uuid="cae50997-67ac-46bd-9724-5fa9675021d4">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
